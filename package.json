@@ -28,7 +28,7 @@
     "command-line",
     "terminal"
   ],
-  "author": "Ilyes Bouzayen <ilyes-bouzayen.vercel.app>",
+  "author": "Ilyes Bouzayen",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -37,7 +37,6 @@
   "bugs": {
     "url": "https://github.com/TheNeovimmer/romdhan/issues"
   },
-  "homepage": "https://ilyes-bouzayen.vercel.app",
   "engines": {
     "node": ">=16.0.0"
   },

@@ -1,27 +1,42 @@
+<div align="center">
+
 # 🌙 Romdhan
 
+**A Modern CLI Companion for Ramadan**
+
 [![npm version](https://badge.fury.io/js/romdhan.svg)](https://badge.fury.io/js/romdhan)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js Version](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)](https://nodejs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D16.0.0-green.svg)](https://nodejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
 
-A beautiful, feature-rich CLI tool for the blessed month of Ramadan. Get prayer times, read Quran, listen to hadith, calculate Zakat, and much more - all from your terminal!
+Get prayer times, read Quran, reflect on Hadith, calculate Zakat, and track your Ramadan progress — all from your terminal.
 
-![Romdhan Banner](https://raw.githubusercontent.com/TheNeovimmer/romdhan/main/screenshots/banner.png)
+[Installation](#installation) • [Usage](#usage) • [Features](#features) • [Documentation](#documentation)
 
-## ✨ Features
+</div>
 
-- 🕌 **Prayer Times** - Get accurate prayer times for any city worldwide
-- ⏰ **Ramadan Countdown** - Track days until Ramadan or Eid
-- 📖 **Quran Reader** - Read any Surah with translations
-- 📝 **Hadith Collection** - Random Ramadan-related hadiths
-- 💰 **Zakat Calculator** - Interactive Zakat calculation
-- 📿 **Digital Tasbih** - Counter for dhikr in terminal
-- ⚙️ **Settings Management** - Save your location and preferences
-- 🌙 **Daily Info** - Moon phases, motivational quotes, and tips
+---
+
+## ✨ Why Romdhan?
+
+Romdhan is designed for developers and terminal enthusiasts who want quick access to Islamic tools without leaving their command line. Whether you're checking prayer times before a meeting, reading Quran during breaks, or calculating Zakat, Romdhan brings everything to your fingertips.
+
+### Key Features
+
+- 🕌 **Accurate Prayer Times** — 15 calculation methods supported
+- ⏰ **Smart Countdown** — Automatically detects if Ramadan is ongoing, upcoming, or has ended
+- 📖 **Quran Reader** — Read any Surah with English translations
+- 📝 **Authentic Hadith** — Ramadan-related hadiths with transliteration
+- 💰 **Zakat Calculator** — Interactive wealth calculation with Nisab check
+- 📿 **Digital Tasbih** — Counter for dhikr with visual progress
+- ⚙️ **Smart Settings** — Auto-location detection and persistent preferences
+- 🌙 **Daily Insights** — Moon phases, quotes, and Ramadan tips
+
+---
 
 ## 📦 Installation
 
-### Global Installation (Recommended)
+### Global Installation
 
 ```bash
 npm install -g romdhan
@@ -33,149 +48,155 @@ npm install -g romdhan
 npx romdhan
 ```
 
-### Local Installation
+### Requirements
+
+- Node.js >= 16.0.0
+- Terminal with Unicode support (for best experience)
+
+---
+
+## 🚀 Quick Start
 
 ```bash
-npm install romdhan
-```
+# 1. Configure your location
+romdhan settings
 
-## 🚀 Usage
-
-After global installation, use the `romdhan` command:
-
-```bash
-romdhan [command] [options]
-```
-
-### Available Commands
-
-#### 🕌 Prayer Times
-
-Get prayer times for your city:
-
-```bash
-# Using default settings
+# 2. Check today's prayer times
 romdhan prayer
 
-# Specify city and country
-romdhan prayer --city "New York" --country "US"
+# 3. View Ramadan countdown
+romdhan countdown
 
-# Short options
-romdhan prayer -c London -C UK
-
-# Use specific calculation method
-romdhan prayer --method 2
+# 4. Get daily inspiration
+romdhan info
 ```
 
-**Calculation Methods:**
-1. University of Islamic Sciences, Karachi
-2. Islamic Society of North America (ISNA) **[Default]**
-3. Muslim World League
-4. Umm al-Qura University, Makkah
-5. Egyptian General Authority of Survey
-6. Institute of Geophysics, University of Tehran
-7. Gulf Region
-8. Kuwait
-9. Qatar
-10. Majlis Ugama Islam Singapura, Singapore
-11. Union Organization islamic de France
-12. Diyanet İşleri Başkanlığı, Turkey
-13. Spiritual Administration of Muslims of Russia
-14. Moonsighting Committee
-15. Dubai (experimental)
+---
 
-#### ⏰ Countdown
+## 📚 Documentation
 
-Show countdown to Ramadan or Eid:
+### 🕌 Prayer Times
+
+Get accurate prayer times for any city worldwide.
+
+```bash
+# Using saved settings
+romdhan prayer
+
+# Specify location
+romdhan prayer --city "New York" --country "US"
+romdhan prayer -c London -C UK
+
+# Choose calculation method
+romdhan prayer --method 4
+```
+
+**Available Methods:**
+
+| # | Method | Region |
+|---|--------|--------|
+| 1 | University of Islamic Sciences, Karachi | South Asia |
+| 2 | Islamic Society of North America (ISNA) | North America |
+| 3 | Muslim World League | Europe |
+| 4 | Umm al-Qura University, Makkah | Arabian Peninsula |
+| 5 | Egyptian General Authority of Survey | Egypt |
+| 6-15 | Various regional methods | Worldwide |
+
+---
+
+### ⏰ Countdown
+
+Smart countdown that adapts to Ramadan's status:
 
 ```bash
 romdhan countdown
 ```
 
-Output shows:
-- Days until Ramadan (if before)
-- Current day of Ramadan (if during)
-- Days until Eid (if during)
-- Progress bar for Ramadan completion
+- **Before Ramadan:** Days remaining until start
+- **During Ramadan:** Current day with progress bar
+- **After Ramadan:** Days until next Ramadan
 
-#### 📖 Quran Reader
+---
 
-Read any Surah from the Quran:
+### 📖 Quran Reader
+
+Read any of the 114 Surahs with translations:
 
 ```bash
 # Read Surah Al-Fatiha (default)
 romdhan quran
 
-# Read specific surah
+# Read specific Surah
 romdhan quran --surah 36
-
-# Limit number of ayahs
-romdhan quran --surah 2 --limit 5
-
-# Short options
-romdhan quran -s 2 -l 10
+romdhan quran -s 2 -l 5
 ```
 
-#### 📝 Hadith
+**Popular Surahs:**
+- **1** - Al-Fatiha (The Opening)
+- **36** - Yaseen
+- **67** - Al-Mulk
+- **112** - Al-Ikhlas
 
-Get a random Ramadan-related hadith:
+---
+
+### 📝 Hadith
+
+Get authentic Ramadan-related hadiths:
 
 ```bash
 romdhan hadith
 ```
 
-Displays:
-- Arabic text
+**Features:**
+- Transliteration for universal terminal compatibility
 - English translation
-- Narrator information
-- Reference
+- Authentic references
+- Use `--arabic` flag if your terminal supports Arabic text
 
-#### 💰 Zakat Calculator
+---
 
-Interactive Zakat calculation:
+### 💰 Zakat Calculator
+
+Interactive Zakat calculation with step-by-step guidance:
 
 ```bash
 romdhan zakat
 ```
 
-The calculator will ask for:
-- Cash savings and bank accounts
-- Value of gold
-- Value of silver
-- Investments and stocks
+**Calculates:**
+- Cash savings & bank accounts
+- Gold & Silver values
+- Investments & stocks
 - Outstanding debts
-
-Then calculates:
-- Total wealth
-- Net wealth (after debts)
+- Total wealth vs Nisab threshold
 - Zakat amount (2.5%)
-- Nisab threshold check
 
-#### 📿 Digital Tasbih
+---
 
-Counter for dhikr:
+### 📿 Digital Tasbih
+
+Interactive dhikr counter:
 
 ```bash
 romdhan tasbih
-
-# Specify dhikr type
-romdhan tasbih --dhikr "SubhanAllah"
-
-# Available dhikrs:
-# - SubhanAllah (33 times)
-# - Alhamdulillah (33 times)
-# - Allahu Akbar (34 times)
-# - La ilaha illallah (100 times)
-# - Astaghfirullah (100 times)
-# - Allahumma salli ala Muhammad (100 times)
+romdhan tasbih --dhikr "Alhamdulillah"
 ```
 
-**Usage:**
-- Press `ENTER` to increment count
-- Press `q` + `ENTER` to quit
-- Visual progress bar shows completion
+**Available Dhikr:**
+- SubhanAllah (33x)
+- Alhamdulillah (33x)
+- Allahu Akbar (34x)
+- La ilaha illallah (100x)
+- Astaghfirullah (100x)
+- Allahumma salli ala Muhammad (100x)
 
-#### ⚙️ Settings
+**Controls:**
+- `ENTER` — Count
+- `q` + `ENTER` — Quit
+
+---
+
+### ⚙️ Settings
 
 Manage your preferences:
 
@@ -183,247 +204,167 @@ Manage your preferences:
 romdhan settings
 ```
 
-Options:
-- 📍 Set City and Country
-- 📐 Change Calculation Method
+**Options:**
+- 📍 Set City & Country
 - 🌍 Auto-detect Location
+- 📐 Choose Calculation Method
 - 👁️ View Current Settings
 - 🗑️ Reset to Defaults
 
-#### 🌙 Daily Info
+**Configuration Files:**
+- macOS: `~/Library/Preferences/romdhan/`
+- Linux: `~/.config/romdhan/`
+- Windows: `%APPDATA%/romdhan/`
 
-Get daily Ramadan information:
+---
+
+### 🌙 Daily Info
+
+Get daily Ramadan insights:
 
 ```bash
 romdhan info
 ```
 
-Shows:
-- Current date
-- Ramadan status
+**Includes:**
+- Current Ramadan status
 - Moon phase
 - Motivational quote
 - Daily tip
 
-## 🔧 Configuration
+---
 
-Settings are stored using `configstore` and persist across sessions.
-
-**Default Settings:**
-- City: Mecca
-- Country: SA
-- Calculation Method: 2 (ISNA)
-
-**Configuration Location:**
-- macOS: `~/Library/Preferences/romdhan/`
-- Windows: `%APPDATA%/romdhan/`
-- Linux: `~/.config/romdhan/Configstore/`
-
-## 📋 Examples
-
-### Quick Start Workflow
-
-```bash
-# 1. Set your location
-romdhan settings
-# Select "Auto-detect Location" or enter manually
-
-# 2. Check prayer times
-romdhan prayer
-
-# 3. See how many days until Ramadan
-romdhan countdown
-
-# 4. Read a hadith for inspiration
-romdhan hadith
-
-# 5. Read some Quran
-romdhan quran --surah 1
-
-# 6. Calculate your Zakat
-romdhan zakat
-
-# 7. Do some dhikr
-romdhan tasbih
-```
-
-### Daily Ramadan Routine
-
-```bash
-# Morning
-romdhan prayer          # Check Fajr time
-romdhan info           # Get daily inspiration
-
-# Evening
-romdhan quran --surah 18  # Read Surah Al-Kahf
-romdhan tasbih            # Complete dhikr
-romdhan countdown         # Check progress
-```
-
-## 🖼️ Screenshots
+## 🖥️ Interface Preview
 
 ### Prayer Times
-
 ```
-╭──────────────────────────────────────────╮
-│    🕌 Prayer Times for New York, US      │
-╰──────────────────────────────────────────╯
-
-📅 Date: 2024-03-15
-📆 Hijri Date: 5 Ramadan 1445 AH
-🌍 Timezone: America/New_York
-📐 Method: Islamic Society of North America
-
-🕐 Prayer Times
-──────────────────────────────
-
-🌅 Fajr:      05:24 AM
-☀️ Sunrise:   07:12 AM
-🌞 Dhuhr:     01:15 PM
-🌤  Asr:       04:45 PM
-🌇 Maghrib:   07:18 PM (Iftar)
-🌙 Isha:      08:45 PM
-```
-
-### Countdown
-
-```
-╭──────────────────────────────────────────╮
-│         🌙 Ramadan Countdown             │
-╰──────────────────────────────────────────╯
-
-🌙 Ramadan Mubarak!
-
-Day 15 of 30
-
-Progress: 50%
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░
-
-🎉 15 days until Eid al-Fitr!
+╔══════════════════════════════════════════════════╗
+║  🕌 New York, US                                 ║
+╠══════════════════════════════════════════════════╣
+║                                                  ║
+║  📅 Gregorian Date        February 19, 2026      ║
+║  📆 Hijri Date            2 Ramadan 1447 AH      ║
+║  🌍 Timezone              America/New_York       ║
+║  📐 Method                ISNA                   ║
+║                                                  ║
+║  🕐 Prayer Times                                 ║
+║  ──────────────────────────────────────────────  ║
+║     🌅 Fajr:       05:24 AM                      ║
+║     ☀️ Sunrise:    07:12 AM                      ║
+║  ▶  🌞 Dhuhr:      01:15 PM  (Next)              ║
+║     🌤️ Asr:        04:45 PM                      ║
+║     🌇 Maghrib:    07:18 PM (Iftar)              ║
+║     🌙 Isha:       08:45 PM                      ║
+║                                                  ║
+╚══════════════════════════════════════════════════╝
 ```
 
-### Tasbih Counter
+### Ramadan Countdown
+```
+╔══════════════════════════════════════════════════╗
+║  ✨ Ramadan Progress                             ║
+╠══════════════════════════════════════════════════╣
+║                                                  ║
+║  🌙 Ramadan Mubarak!                             ║
+║                                                  ║
+║  Day 15 of 30                                    ║
+║                                                  ║
+║  Progress:                                       ║
+║  ████████████████░░░░░░░░░░░░░░░░░░░░ 50%        ║
+║                                                  ║
+║  🎉 15 days until Eid al-Fitr!                   ║
+║                                                  ║
+╚══════════════════════════════════════════════════╝
+```
 
-```
-╔══════════════════════════════════════════╗
-║           📿 Digital Tasbih              ║
-╠══════════════════════════════════════════╣
-║                                          ║
-║   SubhanAllah                            ║
-║   Glory be to Allah                      ║
-║                                          ║
-║   Count: 17 / 33                         ║
-║                                          ║
-║   ▓▓▓▓▓▓▓▓▓░░░░░░░░░ 52%                ║
-║                                          ║
-║   Press ENTER to count                   ║
-║   Press q + ENTER to quit                ║
-║                                          ║
-╚══════════════════════════════════════════╝
-```
+---
 
 ## 🛠️ Development
-
-### Prerequisites
-
-- Node.js >= 16.0.0
-- npm or yarn
 
 ### Setup
 
 ```bash
-# Clone the repository
+# Clone repository
 git clone https://github.com/TheNeovimmer/romdhan.git
-
-# Navigate to directory
 cd romdhan
 
 # Install dependencies
 npm install
 
-# Build the project
+# Build
 npm run build
 
-# Run in development mode
+# Development mode
 npm run dev
 
-# Or run the compiled version
-npm start
+# Run tests
+npm test
 ```
 
-### Available Scripts
+### Scripts
 
-```bash
-npm run build      # Compile TypeScript
-npm run dev        # Run with ts-node
-npm start          # Run compiled version
-npm run lint       # Run ESLint
-npm run lint:fix   # Fix ESLint issues
-npm run format     # Format with Prettier
-npm run clean      # Remove dist folder
-npm run prepublishOnly  # Clean and build before publish
-```
+| Command | Description |
+|---------|-------------|
+| `npm run build` | Compile TypeScript |
+| `npm run dev` | Development with hot reload |
+| `npm start` | Run compiled version |
+| `npm run lint` | Run ESLint |
+| `npm run lint:fix` | Fix ESLint issues |
+| `npm run format` | Format with Prettier |
+| `npm run clean` | Remove build files |
+
+---
 
 ## 📝 API Credits
 
-This CLI uses the following APIs:
+- **[Aladhan API](https://aladhan.com/prayer-times-api)** — Prayer times & Hijri dates
+- **[Al Quran Cloud](https://alquran.cloud/api)** — Quran text & translations
+- **[IP-API](http://ip-api.com/)** — Location detection
 
-- **[Aladhan API](https://aladhan.com/prayer-times-api)** - Prayer times and Hijri date
-- **[Al Quran Cloud](https://alquran.cloud/api)** - Quran text and translations
-- **[IP-API](http://ip-api.com/)** - Location detection
+---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Quick Start
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Create feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'feat: add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open Pull Request
 
 ### Commit Convention
 
-- `feat:` New feature
-- `fix:` Bug fix
-- `docs:` Documentation changes
-- `style:` Code style changes (formatting, etc.)
-- `refactor:` Code refactoring
-- `test:` Adding or updating tests
-- `chore:` Maintenance tasks
+- `feat:` — New features
+- `fix:` — Bug fixes
+- `docs:` — Documentation
+- `style:` — Code style
+- `refactor:` — Code refactoring
+- `test:` — Tests
+- `chore:` — Maintenance
+
+---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License — see [LICENSE](LICENSE) for details.
+
+---
 
 ## 🙏 Acknowledgments
 
 - All praise is due to Allah (SWT)
-- Thanks to the creators of the APIs used in this project
-- The open-source community for the amazing tools and libraries
-
-## 📞 Support
-
-If you found this tool helpful, please:
-
-- ⭐ Star the repository
-- 🐦 Share on social media
-- 💰 Give charity (Sadaqah Jariyah)
-- 🤲 Make dua for the developers
-
-## 🔗 Links
-
-- [npm Package](https://www.npmjs.com/package/romdhan)
-- [GitHub Repository](https://github.com/TheNeovimmer/romdhan)
-- [Portfolio](https://ilyes-bouzayen.vercel.app)
-- [Issue Tracker](https://github.com/TheNeovimmer/romdhan/issues)
+- API providers for their excellent services
+- Open-source community for the amazing tools
 
 ---
 
 <div align="center">
-  <strong>🌙 Ramadan Mubarak! 🌙</strong>
-  <br>
-  <em>May Allah accept your fasts, prayers, and good deeds</em>
-  <br><br>
-  <sub>Made with ❤️ by <a href="https://ilyes-bouzayen.vercel.app">Ilyes Bouzayen</a></sub>
+
+**🌙 Ramadan Mubarak! 🌙**
+
+*May Allah accept your fasts, prayers, and good deeds*
+
 </div>
