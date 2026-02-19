@@ -1,0 +1,149 @@
+{
+  "nav": {
+    "home": "Home",
+    "features": "Features",
+    "commands": "Commands",
+    "docs": "Documentation",
+    "demo": "Demo",
+    "install": "Install"
+  },
+  "hero": {
+    "badge": "v1.0.2 - Now with Dynamic API Integration",
+    "title": "Your Terminal Companion for",
+    "titleHighlight": "Ramadan",
+    "subtitle": "A beautifully crafted CLI tool that brings prayer times, Quran, Hadith, and spiritual tools directly to your command line. Built for developers, by developers.",
+    "ctaPrimary": "Get Started",
+    "ctaSecondary": "View Documentation",
+    "stats": {
+      "downloads": "NPM Downloads",
+      "stars": "GitHub Stars",
+      "version": "Current Version"
+    }
+  },
+  "features": {
+    "title": "Everything You Need",
+    "subtitle": "Powerful features designed to enhance your Ramadan experience without leaving your terminal",
+    "items": {
+      "prayer": {
+        "title": "Accurate Prayer Times",
+        "description": "Get precise prayer times for any city worldwide with 15+ calculation methods including ISNA, Muslim World League, and Umm al-Qura."
+      },
+      "quran": {
+        "title": "Quran Reader",
+        "description": "Read all 114 Surahs with authentic Arabic text and English translations. Features proper RTL rendering for beautiful Arabic display."
+      },
+      "countdown": {
+        "title": "Ramadan Tracker",
+        "description": "Smart countdown that adapts to your location's moon sighting. Automatically detects pre-Ramadan, during Ramadan, and post-Ramadan states."
+      },
+      "hadith": {
+        "title": "Daily Hadith",
+        "description": "Access authentic Ramadan-related hadiths with proper transliteration and English translations from Sahih collections."
+      },
+      "zakat": {
+        "title": "Zakat Calculator",
+        "description": "Interactive wealth calculator with step-by-step guidance. Calculates Nisab threshold and final Zakat obligation (2.5%)."
+      },
+      "tasbih": {
+        "title": "Digital Tasbih",
+        "description": "Keyboard-driven dhikr counter with visual progress tracking. Features 6 preset dhikr patterns for your daily adhkar."
+      }
+    }
+  },
+  "commands": {
+    "title": "Command Reference",
+    "subtitle": "Intuitive commands that feel natural in your terminal",
+    "categories": {
+      "core": "Core Commands",
+      "spiritual": "Spiritual Tools",
+      "utility": "Utilities"
+    },
+    "items": {
+      "prayer": {
+        "cmd": "romdhan prayer",
+        "desc": "Display prayer times for your location",
+        "example": "romdhan prayer --city London --country UK"
+      },
+      "quran": {
+        "cmd": "romdhan quran",
+        "desc": "Read Quran Surahs with translations",
+        "example": "romdhan quran --surah 36 --limit 10"
+      },
+      "countdown": {
+        "cmd": "romdhan countdown",
+        "desc": "Track Ramadan progress with smart countdown",
+        "example": "romdhan countdown"
+      },
+      "hadith": {
+        "cmd": "romdhan hadith",
+        "desc": "Get authentic daily hadith",
+        "example": "romdhan hadith --arabic"
+      },
+      "zakat": {
+        "cmd": "romdhan zakat",
+        "desc": "Calculate your Zakat obligation",
+        "example": "romdhan zakat"
+      },
+      "tasbih": {
+        "cmd": "romdhan tasbih",
+        "desc": "Interactive dhikr counter",
+        "example": "romdhan tasbih --dhikr SubhanAllah"
+      },
+      "info": {
+        "cmd": "romdhan info",
+        "desc": "Daily Ramadan inspiration",
+        "example": "romdhan info --tips"
+      },
+      "settings": {
+        "cmd": "romdhan settings",
+        "desc": "Configure location and preferences",
+        "example": "romdhan settings"
+      }
+    }
+  },
+  "demo": {
+    "title": "Try It Now",
+    "subtitle": "Experience Romdhan directly in your browser. Run commands and see the output in real-time.",
+    "terminal": {
+      "title": "Interactive Terminal",
+      "placeholder": "Type a command...",
+      "hint": "Try: romdhan prayer, romdhan countdown, romdhan quran"
+    }
+  },
+  "installation": {
+    "title": "Get Started in Seconds",
+    "subtitle": "Install Romdhan globally via npm and start using it immediately",
+    "npm": {
+      "title": "NPM (Recommended)",
+      "command": "npm install -g romdhan"
+    },
+    "npx": {
+      "title": "NPX (No Install)",
+      "command": "npx romdhan --help"
+    },
+    "verify": {
+      "title": "Verify Installation",
+      "command": "romdhan --version"
+    },
+    "next": {
+      "title": "Next Steps",
+      "step1": "Configure your location: ",
+      "step2": "Check prayer times: ",
+      "step3": "Read the Quran: "
+    }
+  },
+  "footer": {
+    "tagline": "A modern CLI companion for the blessed month of Ramadan",
+    "links": {
+      "product": "Product",
+      "resources": "Resources",
+      "community": "Community"
+    },
+    "copyright": "© 2026 Romdhan. Built with ❤️ for the Ummah.",
+    "madeBy": "Made by Ilyes Bouzayen"
+  },
+  "language": {
+    "en": "English",
+    "ar": "العربية"
+  }
+}

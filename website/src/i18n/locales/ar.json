@@ -1,0 +1,149 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "features": "المميزات",
+    "commands": "الأوامر",
+    "docs": "التوثيق",
+    "demo": "تجربة",
+    "install": "تثبيت"
+  },
+  "hero": {
+    "badge": "الإصدار ١.٠.٢ - الآن مع دمج API ديناميكي",
+    "title": "رفيقك في الطرفية لشهر",
+    "titleHighlight": "رمضان",
+    "subtitle": "أداة CLI مصممة بإتقان تجلب أوقات الصلاة والقرآن والأحاديث والأدوات الروحية مباشرة إلى سطر الأوامر. مبنية للمطورين، بواسطة مطورين.",
+    "ctaPrimary": "ابدأ الآن",
+    "ctaSecondary": "عرض التوثيق",
+    "stats": {
+      "downloads": "تحميلات NPM",
+      "stars": "نجوم GitHub",
+      "version": "الإصدار الحالي"
+    }
+  },
+  "features": {
+    "title": "كل ما تحتاجه",
+    "subtitle": "مميزات قوية مصممة لتعزيز تجربتك في رمضان دون مغادرة الطرفية",
+    "items": {
+      "prayer": {
+        "title": "أوقات صلاة دقيقة",
+        "description": "احصل على أوقات صلاة دقيقة لأي مدينة في العالم مع أكثر من ١٥ طريقة حساب تشمل ISNA ورابطة العالم الإسلامي وأم القرى."
+      },
+      "quran": {
+        "title": "قارئ القرآن",
+        "description": "اقرأ جميع السور الـ١١٤ بنص عربي أصيل وترجمات إنجليزية. يتميز بعرض RTL السليم لعرض عربي جميل."
+      },
+      "countdown": {
+        "title": "متتبع رمضان",
+        "description": "عداد ذكي يتكيف مع رؤية الهلال في موقعك. يكتشف تلقائياً ما قبل رمضان وأثناء رمضان وبعد رمضان."
+      },
+      "hadith": {
+        "title": "الحديث اليومي",
+        "description": "الوصول إلى أحاديث رمضان الأصيلة مع النقحرة الصحيحة والترجمات الإنجليزية من كتب السنة."
+      },
+      "zakat": {
+        "title": "حاسبة الزكاة",
+        "description": "حاسبة ثروة تفاعلية مع إرشادات خطوة بخطوة. تحسب حد النصاب والزكاة النهائية (٢.٥٪)."
+      },
+      "tasbih": {
+        "title": "السبحة الرقمية",
+        "description": "عداد ذكر يعمل باللوحة المفاتيحة مع تتبع التقدم المرئي. يحتوي على ٦ أنماط ذكر محفوظة لأذكارك اليومية."
+      }
+    }
+  },
+  "commands": {
+    "title": "مرجع الأوامر",
+    "subtitle": "أوامر بديهية تشعرك بالطبيعية في الطرفية",
+    "categories": {
+      "core": "الأوامر الأساسية",
+      "spiritual": "الأدوات الروحية",
+      "utility": "الأدوات المساعدة"
+    },
+    "items": {
+      "prayer": {
+        "cmd": "romdhan prayer",
+        "desc": "عرض أوقات الصلاة لموقعك",
+        "example": "romdhan prayer --city Tunis --country TN"
+      },
+      "quran": {
+        "cmd": "romdhan quran",
+        "desc": "قراءة سور القرآن مع الترجمات",
+        "example": "romdhan quran --surah 36 --limit 10"
+      },
+      "countdown": {
+        "cmd": "romdhan countdown",
+        "desc": "تتبع تقدم رمضان مع عداد ذكي",
+        "example": "romdhan countdown"
+      },
+      "hadith": {
+        "cmd": "romdhan hadith",
+        "desc": "الحصول على حديث يومي أصيل",
+        "example": "romdhan hadith --arabic"
+      },
+      "zakat": {
+        "cmd": "romdhan zakat",
+        "desc": "حساب زكاتك الواجبة",
+        "example": "romdhan zakat"
+      },
+      "tasbih": {
+        "cmd": "romdhan tasbih",
+        "desc": "عداد ذكر تفاعلي",
+        "example": "romdhan tasbih --dhikr SubhanAllah"
+      },
+      "info": {
+        "cmd": "romdhan info",
+        "desc": "إلهام رمضان يومي",
+        "example": "romdhan info --tips"
+      },
+      "settings": {
+        "cmd": "romdhan settings",
+        "desc": "ضبط الموقع والتفضيلات",
+        "example": "romdhan settings"
+      }
+    }
+  },
+  "demo": {
+    "title": "جربها الآن",
+    "subtitle": "جرب رمضان مباشرة في متصفحك. شغل الأوامر وشاهد النتائج في الوقت الفعلي.",
+    "terminal": {
+      "title": "الطرفية التفاعلية",
+      "placeholder": "اكتب أمر...",
+      "hint": "جرب: romdhan prayer, romdhan countdown, romdhan quran"
+    }
+  },
+  "installation": {
+    "title": "ابدأ في ثوانٍ",
+    "subtitle": "ثبت رمضان عالمياً عبر npm وابدأ استخدامها على الفور",
+    "npm": {
+      "title": "NPM (موصى به)",
+      "command": "npm install -g romdhan"
+    },
+    "npx": {
+      "title": "NPX (بدون تثبيت)",
+      "command": "npx romdhan --help"
+    },
+    "verify": {
+      "title": "تحقق من التثبيت",
+      "command": "romdhan --version"
+    },
+    "next": {
+      "title": "الخطوات التالية",
+      "step1": "اضبط موقعك: ",
+      "step2": "تحقق من أوقات الصلاة: ",
+      "step3": "اقرأ القرآن: "
+    }
+  },
+  "footer": {
+    "tagline": "رفيق CLI حديث لشهر رمضان المبارك",
+    "links": {
+      "product": "المنتج",
+      "resources": "الموارد",
+      "community": "المجتمع"
+    },
+    "copyright": "© ٢٠٢٦ رمضان. مبنية بـ ❤️ للأمة الإسلامية.",
+    "madeBy": "صنع بواسطة إلياس بوزيان"
+  },
+  "language": {
+    "en": "English",
+    "ar": "العربية"
+  }
+}

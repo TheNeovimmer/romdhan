@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/romdhan-icon.svg" />
+    <link rel="alternate icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Romdhan - A Modern CLI Companion for Ramadan. Prayer times, Quran, Hadith, Zakat calculator, and more."
+    />
+    <meta name="theme-color" content="#18dc6a" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Romdhan | The Modern CLI for Ramadan</title>
+
+    <script>
+      // Prevent flash of wrong theme
+      (function () {
+        const theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+        document.documentElement.dir = localStorage.getItem('i18nextLng') === 'ar' ? 'rtl' : 'ltr';
+      })();
+    </script>
+  </head>
+  <body
+    className="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300"
+  >
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,310 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(24, 220, 106, 0.3);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #24332a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #18dc6a;
+}
+
+/* Light mode scrollbar */
+.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+  background: #18dc6a;
+}
+
+/* Terminal glow effect */
+.terminal-glow {
+  box-shadow: 0 0 40px -10px rgba(24, 220, 106, 0.2);
+}
+
+/* Glass navigation */
+.glass-nav {
+  backdrop-filter: blur(12px);
+  background-color: rgba(10, 15, 12, 0.8);
+}
+
+.glass-nav-light {
+  backdrop-filter: blur(12px);
+  background-color: rgba(246, 248, 247, 0.9);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* RTL Support */
+[dir='rtl'] {
+  font-family: 'Noto Sans Arabic', 'Inter', sans-serif;
+}
+
+[dir='rtl'] .arabic-text {
+  font-family: 'Noto Sans Arabic', 'Amiri', serif;
+  line-height: 1.8;
+}
+
+/* Button hover glow */
+.btn-glow:hover {
+  box-shadow: 0 0 20px rgba(24, 220, 106, 0.4);
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Code block styling */
+.code-block {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Progress bar animation */
+@keyframes progress-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--progress);
+  }
+}
+
+.animate-progress {
+  animation: progress-fill 1s ease-out forwards;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Glow animation */
+@keyframes glow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Terminal typing cursor */
+.typing-cursor::after {
+  content: '_';
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Smooth transitions for theme switch */
+* {
+  transition-property: background-color, border-color;
+  transition-duration: 300ms;
+  transition-timing-function: ease;
+}
+
+/* Feature card icon animation */
+.icon-animate {
+  transition: transform 0.3s ease;
+}
+
+.group:hover .icon-animate {
+  transform: scale(1.1);
+}
+
+/* Primary button style */
+.btn-primary {
+  @apply px-6 py-3 bg-primary text-background-dark font-bold rounded-xl;
+  @apply hover:shadow-glow transition-all duration-300;
+}
+
+/* Secondary button style */
+.btn-secondary {
+  @apply px-6 py-3 bg-slate-800/50 text-white font-bold rounded-xl border border-slate-700;
+  @apply hover:bg-slate-800 transition-all duration-300;
+}
+
+/* Section spacing */
+section {
+  @apply py-24;
+}
+
+/* Container */
+.container-custom {
+  @apply max-w-7xl mx-auto px-6;
+}
+
+/* Dark mode specific */
+.dark .card-dark {
+  @apply bg-card-dark border-border-dark;
+}
+
+.dark .text-muted {
+  @apply text-slate-400;
+}
+
+/* Light mode specific */
+.light .card-light {
+  @apply bg-white border-border-light shadow-card;
+}
+
+.light .text-muted {
+  @apply text-slate-600;
+}
+
+/* Terminal styling */
+.terminal-header {
+  @apply flex items-center justify-between px-4 py-3 bg-[#0b1b2b] border-b border-border-dark;
+}
+
+.terminal-body {
+  @apply p-6 font-mono text-sm leading-relaxed overflow-x-auto;
+}
+
+/* JSON syntax highlighting */
+.json-key {
+  @apply text-primary;
+}
+
+.json-string {
+  @apply text-green-400;
+}
+
+.json-boolean {
+  @apply text-orange-400;
+}
+
+.json-number {
+  @apply text-cyan-400;
+}
+
+/* Status indicators */
+.status-dot {
+  @apply relative flex h-2 w-2;
+}
+
+.status-dot::before {
+  content: '';
+  @apply animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75;
+}
+
+.status-dot::after {
+  content: '';
+  @apply relative inline-flex rounded-full h-2 w-2 bg-primary;
+}
+
+/* Navigation link underline animation */
+.nav-link {
+  @apply relative;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
+
+/* Badge style */
+.badge {
+  @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest;
+}
+
+/* Prayer time item */
+.prayer-item {
+  @apply flex gap-8;
+}
+
+.prayer-time {
+  @apply text-white;
+}
+
+.prayer-time.active {
+  @apply text-primary font-bold;
+}
+
+/* Lucide icon styling */
+.lucide {
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lucide-sm {
+  width: 16px;
+  height: 16px;
+}
+
+.lucide-md {
+  width: 24px;
+  height: 24px;
+}
+
+.lucide-lg {
+  width: 32px;
+  height: 32px;
+}
+
+.lucide-xl {
+  width: 48px;
+  height: 48px;
+}
