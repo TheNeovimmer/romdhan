@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-02-19
+
+### Changed
+- Package renamed from `ramadan-cli` to `romdhan`
+- Modernized UI/UX with new color scheme and design system
+- Improved terminal compatibility for Arabic text
+- Better error messages with helpful suggestions
+- Enhanced help text for all commands
+
+### Added
+- New display utilities with modern color palette
+- Progress bars for visual feedback
+- Tips and guidance throughout the app
+- Quick start guide for first-time users
+- Table formatting for better data presentation
+- `--arabic` flag for hadith command
+- Better loading spinners with contextual messages
+
+### Fixed
+- Arabic text rendering issues in terminals
+- Better error handling with user-friendly messages
+
 ## [1.0.0] - 2026-02-19
 
 ### Added

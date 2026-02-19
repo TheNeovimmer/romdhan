@@ -1,6 +1,6 @@
 {
   "name": "romdhan",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A beautiful CLI tool for Ramadan - prayer times, countdown, Quran, Hadith, Zakat calculator, and more",
   "main": "dist/index.js",
   "bin": {

@@ -5,97 +5,121 @@ import boxen from 'boxen';
 import dayjs from 'dayjs';
 import { fetchPrayerTimes, PrayerTimesResponse } from '../api/aladhan.js';
 import { getSettings } from '../utils/config.js';
-import { displayError } from '../utils/display.js';
+import { 
+  displayError, 
+  colors, 
+  formatPrayerTime, 
+  createTableRow,
+  displayTip 
+} from '../utils/display.js';
 
 export const prayerCommand = new Command('prayer')
-  .description('Get prayer times for a specific city')
-  .option('-c, --city <city>', 'City name')
+  .description('🕌 Get prayer times for your city')
+  .option('-c, --city <city>', 'City name (e.g., New York, London)')
   .option('-C, --country <country>', 'Country code (e.g., US, UK, SA)')
-  .option('-m, --method <method>', 'Calculation method (1-7)', '2')
+  .option('-m, --method <method>', 'Calculation method (1-15)', '2')
+  .addHelpText('after', `
+${colors.info.bold('Examples:')}
+  $ romdhan prayer                          # Use saved location
+  $ romdhan prayer -c "New York" -C US     # Specify location
+  $ romdhan prayer --method 4              # Use Makkah method
+
+${colors.muted('Tip: Set your default location with')} ${colors.success('romdhan settings')}
+  `)
   .action(async (options) => {
-    const spinner = ora('Fetching prayer times...').start();
+    const settings = getSettings();
+    const city = options.city || settings.city;
+    const country = options.country || settings.country;
+    const method = parseInt(options.method) || settings.calculationMethod;
+
+    if (!city || !country) {
+      displayError(
+        'No location configured',
+        'Run "romdhan settings" to set your city and country, or provide them with --city and --country options'
+      );
+      return;
+    }
+
+    const spinner = ora({
+      text: colors.info(`Fetching prayer times for ${city}...`),
+      spinner: 'moon',
+    }).start();
 
     try {
-      const settings = getSettings();
-      const city = options.city || settings.city;
-      const country = options.country || settings.country;
-      const method = parseInt(options.method) || settings.calculationMethod;
-
-      if (!city || !country) {
-        spinner.stop();
-        displayError('Please provide city and country, or set defaults using "ramadan settings"');
-        return;
-      }
-
       const data: PrayerTimesResponse = await fetchPrayerTimes(city, country, method);
-      
       spinner.stop();
 
       const { timings, date, meta } = data.data;
-
-      const prayerBox = boxen(
-        `
-${chalk.yellow.bold('📅 Date:')} ${chalk.white(date.readable)}
-${chalk.yellow.bold('📆 Hijri Date:')} ${chalk.white(`${date.hijri.day} ${date.hijri.month.en} ${date.hijri.year} AH`)}
-${chalk.yellow.bold('🌍 Timezone:')} ${chalk.white(meta.timezone)}
-${chalk.yellow.bold('📐 Method:')} ${chalk.white(meta.method.name)}
-
-${chalk.cyan.bold('🕐 Prayer Times')}
-${'─'.repeat(30)}
-
-🌅 ${chalk.yellow('Fajr:')}      ${chalk.cyan(timings.Fajr)}
-☀️  ${chalk.yellow('Sunrise:')}  ${chalk.cyan(timings.Sunrise)}
-🌞 ${chalk.yellow('Dhuhr:')}    ${chalk.cyan(timings.Dhuhr)}
-🌤  ${chalk.yellow('Asr:')}      ${chalk.cyan(timings.Asr)}
-🌇 ${chalk.yellow('Maghrib:')}  ${chalk.cyan.bold(timings.Maghrib)} ${chalk.green('(Iftar)')}
-🌙 ${chalk.yellow('Isha:')}     ${chalk.cyan(timings.Isha)}
-        `.trim(),
-        {
-          padding: 1,
-          margin: 1,
-          borderStyle: 'round',
-          borderColor: 'green',
-          title: `🕌 Prayer Times for ${city}, ${country}`,
-          titleAlignment: 'center',
-        }
-      );
-
-      console.log(prayerBox);
-
-      // Show current/next prayer
       const currentTime = dayjs();
+
+      // Find next prayer
       const prayers = [
-        { name: 'Fajr', time: timings.Fajr },
-        { name: 'Dhuhr', time: timings.Dhuhr },
-        { name: 'Asr', time: timings.Asr },
-        { name: 'Maghrib', time: timings.Maghrib },
-        { name: 'Isha', time: timings.Isha },
+        { name: 'Fajr', time: timings.Fajr, icon: '🌅' },
+        { name: 'Sunrise', time: timings.Sunrise, icon: '☀️' },
+        { name: 'Dhuhr', time: timings.Dhuhr, icon: '🌞' },
+        { name: 'Asr', time: timings.Asr, icon: '🌤️' },
+        { name: 'Maghrib', time: timings.Maghrib, icon: '🌇' },
+        { name: 'Isha', time: timings.Isha, icon: '🌙' },
       ];
 
-      let nextPrayer = null;
-      for (const prayer of prayers) {
-        const prayerTime = dayjs(`${dayjs().format('YYYY-MM-DD')} ${prayer.time}`);
+      let nextPrayerIndex = -1;
+      for (let i = 0; i < prayers.length; i++) {
+        const prayerTime = dayjs(`${dayjs().format('YYYY-MM-DD')} ${prayers[i].time}`);
         if (prayerTime.isAfter(currentTime)) {
-          nextPrayer = prayer;
+          nextPrayerIndex = i;
           break;
         }
       }
 
-      if (nextPrayer) {
-        console.log(
-          boxen(
-            chalk.green.bold(`⏰ Next Prayer: ${nextPrayer.name} at ${nextPrayer.time}`),
-            {
-              padding: 1,
-              borderStyle: 'round',
-              borderColor: 'cyan',
-            }
-          )
-        );
+      // Build prayer times display
+      let prayerTimesText = '\n';
+      prayers.forEach((prayer, index) => {
+        const isNext = index === nextPrayerIndex;
+        const highlight = isNext ? colors.success.bold('▶') : ' ';
+        const timeColor = isNext ? colors.success : colors.primary;
+        const nameColor = isNext ? colors.success.bold : colors.info;
+        const special = prayer.name === 'Maghrib' ? colors.warning(' (Iftar)') : '';
+        
+        prayerTimesText += `${highlight} ${prayer.icon} ${nameColor(prayer.name.padEnd(10))} ${timeColor.bold(prayer.time)}${special}\n`;
+      });
+
+      const content = `
+${colors.accent.bold('📅 Date Information')}
+${createTableRow('Gregorian', date.readable, '📆')}
+${createTableRow('Hijri', `${date.hijri.day} ${date.hijri.month.en} ${date.hijri.year} AH`, '🌙')}
+${createTableRow('Timezone', meta.timezone, '🌍')}
+${createTableRow('Method', meta.method.name, '📐')}
+
+${colors.accent.bold('🕐 Prayer Times')}
+${prayerTimesText}
+${nextPrayerIndex !== -1 
+  ? colors.success(`\n✨ Next Prayer: ${prayers[nextPrayerIndex].name} at ${prayers[nextPrayerIndex].time}`)
+  : colors.muted('\n✓ All prayers completed for today')}
+      `.trim();
+
+      console.log('\n');
+      console.log(
+        boxen(content, {
+          padding: 1,
+          margin: 1,
+          borderStyle: 'round',
+          borderColor: '#00D9FF',
+          title: `🕌 ${city}, ${country}`,
+          titleAlignment: 'center',
+        })
+      );
+      console.log('\n');
+
+      // Show tip for beginners
+      if (nextPrayerIndex !== -1 && prayers[nextPrayerIndex].name === 'Maghrib') {
+        displayTip('Remember to make dua before breaking your fast!');
       }
 
     } catch (error) {
       spinner.stop();
-      displayError('Failed to fetch prayer times. Please check your city/country and try again.');
+      displayError(
+        `Failed to fetch prayer times for "${city}, ${country}"`,
+        'Check your spelling or try a different city name. Example: "New York", "London", "Mecca"'
+      );
     }
   });

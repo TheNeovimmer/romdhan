@@ -1,9 +1,8 @@
 import { Command } from 'commander';
 import inquirer from 'inquirer';
-import chalk from 'chalk';
 import boxen from 'boxen';
 import ora from 'ora';
-import { displaySuccess, displayError } from '../utils/display.js';
+import { displaySuccess, displayError, colors, createTableRow, displayTip } from '../utils/display.js';
 
 interface ZakatAnswers {
   savings: string;
@@ -14,18 +13,32 @@ interface ZakatAnswers {
 }
 
 export const zakatCommand = new Command('zakat')
-  .description('Calculate your Zakat (2.5% of qualifying wealth)')
+  .description('💰 Calculate your Zakat (2.5% of qualifying wealth)')
+  .addHelpText('after', `
+${colors.info.bold('What is Zakat?')}
+  Zakat is 2.5% of your total qualifying wealth that has been in your
+  possession for one lunar year (haul).
+
+${colors.info.bold('Nisab Threshold:')}
+  Approximately $400+ USD (varies by current gold/silver prices)
+  If your net wealth is below this, Zakat is not obligatory.
+
+${colors.info.bold('Examples:')}
+  $ romdhan zakat    # Start interactive calculator
+  `)
   .action(async () => {
+    console.log('\n');
     console.log(
       boxen(
-        chalk.yellow('💰 Zakat Calculator\n\n') +
-        chalk.white('Zakat is 2.5% of your total qualifying wealth that has been in your possession for one lunar year.\n') +
-        chalk.cyan('Nisab threshold: Approximately $400+ USD (varies by gold/silver prices)'),
+        `${colors.accent.bold('💰 Zakat Calculator')}\n\n` +
+        `${colors.white('Calculate your annual Zakat obligation')}\n\n` +
+        `${colors.muted('Zakat Rate:')} ${colors.success('2.5%')}\n` +
+        `${colors.muted('Nisab Threshold:')} ${colors.warning('~$400 USD')}`,
         {
           padding: 1,
           margin: 1,
           borderStyle: 'round',
-          borderColor: 'yellow',
+          borderColor: '#FFD93D',
           title: '🌙 Islamic Zakat',
           titleAlignment: 'center',
         }
@@ -37,7 +50,7 @@ export const zakatCommand = new Command('zakat')
         {
           type: 'input',
           name: 'savings',
-          message: '💵 Cash savings and bank accounts:',
+          message: colors.primary('💵 Cash savings and bank accounts:'),
           default: '0',
           validate: (input: string) => {
             if (isNaN(Number(input)) || Number(input) < 0) {
@@ -49,7 +62,7 @@ export const zakatCommand = new Command('zakat')
         {
           type: 'input',
           name: 'gold',
-          message: '🥇 Value of gold you own:',
+          message: colors.primary('🥇 Value of gold you own ($):'),
           default: '0',
           validate: (input: string) => {
             if (isNaN(Number(input)) || Number(input) < 0) {
@@ -61,7 +74,7 @@ export const zakatCommand = new Command('zakat')
         {
           type: 'input',
           name: 'silver',
-          message: '🥈 Value of silver you own:',
+          message: colors.primary('🥈 Value of silver you own ($):'),
           default: '0',
           validate: (input: string) => {
             if (isNaN(Number(input)) || Number(input) < 0) {
@@ -73,7 +86,7 @@ export const zakatCommand = new Command('zakat')
         {
           type: 'input',
           name: 'investments',
-          message: '📈 Value of investments and stocks:',
+          message: colors.primary('📈 Value of investments and stocks ($):'),
           default: '0',
           validate: (input: string) => {
             if (isNaN(Number(input)) || Number(input) < 0) {
@@ -85,7 +98,7 @@ export const zakatCommand = new Command('zakat')
         {
           type: 'input',
           name: 'debts',
-          message: '💳 Outstanding debts you owe:',
+          message: colors.primary('💳 Outstanding debts you owe ($):'),
           default: '0',
           validate: (input: string) => {
             if (isNaN(Number(input)) || Number(input) < 0) {
@@ -96,11 +109,12 @@ export const zakatCommand = new Command('zakat')
         },
       ]);
 
-      const spinner = ora('Calculating Zakat...').start();
+      const spinner = ora({
+        text: colors.info('Calculating Zakat...'),
+        spinner: 'dots',
+      }).start();
       
-      // Simulate calculation time
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise(resolve => setTimeout(resolve, 800));
       spinner.stop();
 
       const savings = parseFloat(answers.savings) || 0;
@@ -112,31 +126,27 @@ export const zakatCommand = new Command('zakat')
       const totalWealth = savings + gold + silver + investments;
       const netWealth = totalWealth - debts;
       const zakatAmount = netWealth * 0.025;
+      const nisabThreshold = 400;
 
-      // Nisab threshold (approximate, varies by gold/silver prices)
-      const nisabThreshold = 400; // Approximate USD value
-
+      console.log('\n');
       console.log(
         boxen(
-          `
-${chalk.yellow.bold('📊 Wealth Summary:')}
-${'─'.repeat(40)}
-💵 Cash Savings:        $${savings.toLocaleString()}
-🥇 Gold:                $${gold.toLocaleString()}
-🥈 Silver:              $${silver.toLocaleString()}
-📈 Investments:         $${investments.toLocaleString()}
-${chalk.red('💳 Debts:')}             ${chalk.red(`-$${debts.toLocaleString()}`)}
-${'─'.repeat(40)}
-${chalk.cyan('💰 Total Wealth:')}      $${totalWealth.toLocaleString()}
-${chalk.cyan('📉 Net Wealth:')}        $${netWealth.toLocaleString()}
-
-${chalk.green.bold('💵 Zakat Due (2.5%):')}   ${chalk.green.bold(`$${zakatAmount.toLocaleString()}`)}
-          `.trim(),
+          `${colors.accent.bold('📊 Wealth Summary')}\n\n` +
+          `${createTableRow('Cash Savings', `$${savings.toLocaleString()}`, '💵')}\n` +
+          `${createTableRow('Gold', `$${gold.toLocaleString()}`, '🥇')}\n` +
+          `${createTableRow('Silver', `$${silver.toLocaleString()}`, '🥈')}\n` +
+          `${createTableRow('Investments', `$${investments.toLocaleString()}`, '📈')}\n` +
+          `${colors.muted('─'.repeat(35))}\n` +
+          `${createTableRow('Total Wealth', `$${totalWealth.toLocaleString()}`, '💰')}\n` +
+          `${createTableRow('Debts', `-$${debts.toLocaleString()}`, '💳')}\n` +
+          `${colors.muted('─'.repeat(35))}\n` +
+          `${createTableRow('Net Wealth', `$${netWealth.toLocaleString()}`, '📊')}\n\n` +
+          `${colors.success.bold(`💵 Zakat Due: $${zakatAmount.toLocaleString()}`)}`,
           {
             padding: 1,
             margin: 1,
             borderStyle: 'round',
-            borderColor: 'green',
+            borderColor: '#00E676',
             title: '🌙 Zakat Calculation',
             titleAlignment: 'center',
           }
@@ -144,33 +154,46 @@ ${chalk.green.bold('💵 Zakat Due (2.5%):')}   ${chalk.green.bold(`$${zakatAmou
       );
 
       if (netWealth < nisabThreshold) {
+        console.log('\n');
         console.log(
           boxen(
-            chalk.yellow('⚠️  Your wealth is below the Nisab threshold.\nZakat is not obligatory, but you may still give voluntary charity (Sadaqah).'),
+            `${colors.warning.bold('⚠ Below Nisab Threshold')}\n\n` +
+            `${colors.white('Your wealth is below the Nisab threshold.')}\n` +
+            `${colors.muted('Zakat is not obligatory, but you may still give voluntary charity (Sadaqah).')}`,
             {
               padding: 1,
               margin: 1,
               borderStyle: 'round',
-              borderColor: 'yellow',
+              borderColor: '#FFD93D',
             }
           )
         );
+        displayTip('Even small acts of charity are rewarded greatly by Allah!');
       } else {
-        displaySuccess(`Your Zakat amount is $${zakatAmount.toLocaleString()}`);
+        displaySuccess(
+          `Your Zakat amount is $${zakatAmount.toLocaleString()}`,
+          'May Allah accept your charity and multiply your rewards'
+        );
+        
+        console.log('\n');
         console.log(
           boxen(
-            chalk.cyan('📖 "And establish prayer and give Zakat, and whatever good you put forward for yourselves - you will find it with Allah. Indeed, Allah of what you do, is Seeing." (Quran 2:110)'),
+            `${colors.accent.bold('📖 Quranic Reminder')}\n\n` +
+            `${colors.white('"And establish prayer and give Zakat, and whatever good you put forward for yourselves - you will find it with Allah. Indeed, Allah of what you do, is Seeing."')}\n\n` +
+            `${colors.muted('— Quran 2:110')}`,
             {
               padding: 1,
               margin: 1,
               borderStyle: 'round',
-              borderColor: 'cyan',
+              borderColor: '#64B5F6',
             }
           )
         );
       }
 
+      console.log('\n');
+
     } catch (error) {
-      displayError('Failed to calculate Zakat. Please try again.');
+      displayError('Failed to calculate Zakat', 'Please try again with valid numbers');
     }
   });

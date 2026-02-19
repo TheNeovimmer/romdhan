@@ -3,6 +3,7 @@ import axios from 'axios';
 export interface Hadith {
   id: string;
   arabic: string;
+  transliteration: string;
   english: {
     narrator: string;
     text: string;
@@ -13,7 +14,8 @@ export interface Hadith {
 const ramadanHadiths: Hadith[] = [
   {
     id: '1',
-    arabic: 'قال رسول الله ﷺ: مَنْ صَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ',
+    arabic: '', // Empty to avoid terminal issues
+    transliteration: 'Qala Rasool Allah (SAW): Man sāma Ramadhāna imānan wahtisāban ghufira lahu mā taqaddama min dhanbihi',
     english: {
       narrator: 'Narrated by Abu Huraira',
       text: 'Whoever fasts Ramadan out of faith and in the hope of reward, his previous sins will be forgiven.',
@@ -22,7 +24,8 @@ const ramadanHadiths: Hadith[] = [
   },
   {
     id: '2',
-    arabic: 'قال رسول الله ﷺ: إِذَا دَخَلَ رَمَضَانُ فُتِّحَتْ أَبْوَابُ الْجَنَّةِ وَغُلِّقَتْ أَبْوَابُ النَّارِ وَصُفِّدَتِ الشَّيَاطِينُ',
+    arabic: '',
+    transliteration: 'Qala Rasool Allah (SAW): Idhā dakhala Ramadhānu futtiḥat abwābu al-jannati wa ghulliqat abwābu an-nāri wa suffidat ash-shayātīn',
     english: {
       narrator: 'Narrated by Abu Huraira',
       text: 'When Ramadan begins, the gates of Paradise are opened, the gates of Hell are closed, and the devils are chained.',
@@ -31,7 +34,8 @@ const ramadanHadiths: Hadith[] = [
   },
   {
     id: '3',
-    arabic: 'قال رسول الله ﷺ: تَسَحَّرُوا فَإِنَّ فِي السَّحُورِ بَرَكَةً',
+    arabic: '',
+    transliteration: 'Qala Rasool Allah (SAW): Tasarraḥū fa inna fi as-sahūri barakah',
     english: {
       narrator: 'Narrated by Anas bin Malik',
       text: 'Take Suhur as there is a blessing in it.',
@@ -40,7 +44,8 @@ const ramadanHadiths: Hadith[] = [
   },
   {
     id: '4',
-    arabic: 'قال رسول الله ﷺ: مَنْ قَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ',
+    arabic: '',
+    transliteration: 'Qala Rasool Allah (SAW): Man qāma Ramadhāna imānan wahtisāban ghufira lahu mā taqaddama min dhanbihi',
     english: {
       narrator: 'Narrated by Abu Huraira',
       text: 'Whoever stands in prayer during Ramadan out of faith and in the hope of reward, his previous sins will be forgiven.',
@@ -49,7 +54,8 @@ const ramadanHadiths: Hadith[] = [
   },
   {
     id: '5',
-    arabic: 'قال رسول الله ﷺ: إِنَّ لِلصَّائِمِ فَرْحَتَيْنِ يَفْرَحُهُمَا: إِذَا أَفْطَرَ فَرِحَ، وَإِذَا لَقِيَ رَبَّهُ فَرِحَ بِصَوْمِهِ',
+    arabic: '',
+    transliteration: 'Qala Rasool Allah (SAW): Inna liṣ-ṣāimi faraḥatayni yafraḥuhumā: Idhā afṭara fariḥa, wa idhā laqiya Rabbahu fariḥa biṣawmihi',
     english: {
       narrator: 'Narrated by Abu Huraira',
       text: 'The fasting person has two moments of joy: when he breaks his fast he rejoices, and when he meets his Lord he rejoices in his fasting.',
@@ -59,7 +65,6 @@ const ramadanHadiths: Hadith[] = [
 ];
 
 export const fetchRandomHadith = async (): Promise<Hadith> => {
-  // Return a random hadith from the local collection
   const randomIndex = Math.floor(Math.random() * ramadanHadiths.length);
   return ramadanHadiths[randomIndex];
 };
